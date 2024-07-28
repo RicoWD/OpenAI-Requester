@@ -1,10 +1,16 @@
 import openai
 import csv
+from dotenv import load_dotenv
+import os
+
+# Charger les variables d'environnement à partir du fichier .env
+load_dotenv()
 
 # ATTENTION ! Doit normalement être dans un fichier ".env" qui doit rester secret.
 # C'est avec la clé API que l'on s'identifie auprès de chatGPT et que l'on est débité
 
-OPENAI_API_KEY = "sk-OkjzlJPKKwecP2qFPm00T3BlbkFJfc8avgmjt8PlmEivx---"
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # def (py) = function (js)
 # (prompt) détermine l'arguement (ce qu'on envoie à la fonction lorsqu'on l'appelle)
