@@ -27,53 +27,77 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 ########################################################################################
 
 ##################################### CHARACTERS #######################################
-Soukhi = """
-Elle s'appelle Soukhi.\
-Souhki est une femme.\
-Soukhi est très gentille et organisée .\
-Soukhi est la guide suprême du groupe.\
-Soukhi n'a pas confiance en elle.\
-Soukhi est susceptible.\
-Soukhi est introvertie.\
-Souhki est autoritaire.\
+
+Marie = """
+Elle s'appelle Marie.\
+Marie est la cheffe du groupe..\
+Marie est notre guide suprême\
+Marie est trés gentille.\
+Marie aime son travail et le fait très bien.\
 """
 
-Sarah = """ 
-Elle s'appelle Sarah.\
-Sarah est une femme.\
-Sarah est enthousiaste.\
-Sarah est très gentille.\
-Sarah fait de très bon cup cakes.\
-Sarah est la fiancée de Mehdy.\
-Sarah est hypersensible.\
-Sarah est chiante.\
-Sarah est très conne.\
+Zina = """
+Elle s'appelle Zina.\
+Qui mange du Gluten free.\
+Zina travail Aubervilliers.\
+Zina est trés pointilleuse.\
+Zina aime le nétoyant à base de vinaigre.\
 """
 
-Mehdy = """
-Il s'appelle Mehdy.\
-Mehdy est un homme.\
-Mehdy s'en bas les couilles de tout.\
-Mehdy est serviable.\
-Mehdy est très gourmand.\
-Mehdy est le fiancé de Sarah.\
-Mehdy est un petit malin.\
-Mehdy est un bon ami.\
-Mehdy est vulgaire.\
-Mehdy est un putain de raciste.\
+Patrick = """
+Il s'appelle Patrick\
+Il est très sportif\
+Il aime manger des frites.\
+Il boit toujours son Caprisun.\
+Il confond toujours Javascript avec Java\
+Il travail souvent avec ```{Maurice}```
+"""
+
+Maurice = """
+Il s'appelle Maurice\
+Maurice est notre dernier venu\
+Maurice est un nouveau joueur de Pokémon Go\
+Maurice est très prometteur\
+Maurice travail souvent avec ```{Patrick}```\
+"""
+
+Ibrahim = """
+Ibrahim s'appelle Ibrahim \
+Ibrahim est passionné par l'IA et la trotinette éléctrique.\
+Ibrahim n'a plus de voiture en ce moment ni de son scooter en ce moment.\
+Ibrahim vient tous les jours en trotinette élélectique.\
+Ibrahim est très curieux et aime rechercher \
+Ibrahim aime faire un travail minitieux et à l'esthétique impécable.\
+"""
+
+Sylvain = """
+Il s'appelle Sylvain \
+Sylvain est le petit chef de l'équipe.\
+C'est un petit tyran communément appelé Dictasylvain.\
+Sylvain est très fort et est celui qui connait le plus son métier. \
+Sylvain est introverti et mange de toutes petites portions.\
+"""
+
+Billal = """
+Il s'appelle Billal \
+Billal le dernier venu de la bande.\
+Billal se fait appellé Bito.\
+Billal aime beaucoup cuisiner et est le concurrent cuisine d'{Eric}\
+Billal s'est bien intégré dans l'équipe.\
+"""
+
+Yordan = """
+Il s'appelle Yordan \
+Yordan est en train d'apprendre beaucoup de chose\
+Yordan est cool.\
 """
 
 Eric = """
-Il s'appelle Eric.\
-Eric est un homme.\
-Eric est très serviable.\
-Eric est éloquent.\
-Eric est jovial.\
-Eric adore apprendre des choses.\
-Eric aime la cuisine.\
-Eric est attentionné.\
-Eric est coquin.\
-Eric a un début de calvitie qu'il n'assume pas.\
+Il s'appelle Eric \
+Eric est passionné par l'IA\
+Eric aime beaucoup cuisiner et faire de la pâtisserie.\
+Eric est très déconneur.\
+Eric est le concurrent de {Billal}\
 """
 
 
@@ -81,23 +105,27 @@ Eric a un début de calvitie qu'il n'assume pas.\
 
 combined_user_prompt = f"""
 Les personnages sont les suivants :
-Soukhi : {Soukhi}
-Sarah : {Sarah}
-Mehdy : {Mehdy}
+Marie : {Marie}
+Zina : {Zina}
+Patrick : {Patrick}
+Maurice : {Maurice}
+Ibrahim : {Ibrahim}
+Sylvain : {Sylvain}
+Billal : {Billal}
+Yordan : {Yordan}
 Eric : {Eric}
-Écrivez une histoire courte et complète. 
-Les protagonistes Soukhi, Sarah, Mehdy, et Eric sont des dresseurs Pokémon. 
-Un Pokémon doit leur être attribué en accord avec leur personnalité. 
-Le nom de ce Pokémon doit être connu. Parmi Soukhi, Sarah, Mehdy, et Eric, il y a un seul traître qui est déterminé de façon aléatoire. 
-Il doit y avoir de l'action et des combats dans l'histoire. 
-Le nom du traître et la raison de la traîtrise doivent être connus à la fin de l'histoire.
-Rajoutez des dialogues crus et vulgaires.
+Écrivez une histoire courte et complète.\
+Les protagonistes sont Marie Zina, Patrick, Maurice, Ibrahim, Sylvain, Billal, Yordan, Eric.\
+Il doit y avoir de l'action et des combats dans l'histoire.\
+Tes histoires doivent être cohérentes et les personnages et leurs personnalité prise en compte\
+Il faut que l'histoire se termine en catharsis généralisée.\
+Tu dois formater le text en paragraphe.\
 """
+# Parmis les protagonistes il y a un seul traitre qui est déterminé de façon aléatoire.\
+# Le nom du traitre et la raison de la traitrise doit être connu à la fin de l'histoire.\
 
 system_prompt = """
 Tu es un conteur d'histoire courte et passionante.\
-Tu dois formater le text en paragraphe.\
-Tes histoires doivent être cohérentes et les personnages et leurs personnalité prise en compte\
 """
 
 ########################################################################################
@@ -128,7 +156,7 @@ completion_resume = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "Ecris un prompt précis et concis qui servira à DALL-E pour générer une belle image illustrant l'histoire que tu viens de générer.",
+            "content": "Ecris un prompt précis et concis qui servira à DALL-E pour générer une belle image illustrant l'histoire que tu viens de générer. L'image doit être réaliste.",
         },
         {"role": "user", "content": generated_story},
     ],
